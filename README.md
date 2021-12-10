@@ -1,52 +1,82 @@
-# JasonSandeman_T1A3
+# JasonSandeman_T1A3 - Terminal Application
 
-## Source Code
+A recipe suggestion app written using ruby.
+
+## 🔗 Links
 
 View the source code on GitHub [here](https://github.com/jwsandeman/JasonSandeman_T1A3)
 
+View my Notion Project Management Dashboard [here](https://jwsandeman.notion.site/T1A3-Terminal-Application-efe7f174b7fa4dd69b60a83e1c0847ab)
+
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://festive-aryabhata-690f3c.netlify.app/index.html)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jason-sandeman-33268496/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/jwsandeman)
+
 ## Installation
 
+Clone the project
+
+```bash
+  git clone https://github.com/jwsandeman/JasonSandeman_T1A3.git
 ```
-installation script??
+
+Go to the project directory
+
+```bash
+  cd JasonSandeman_T1A3
 ```
+
+Install dependencies and run application
+
+```bash
+  ./install.sh
+```
+
 
 ## Software Development Plan
 
 ### 1. Purpose & Scope
 
-I will be building a recipe suggestion app based on the parameters that a user inputs. The app asks the user what ingredients they currently have in their cupboards/fridge and then suggests relevant recipes based on matching ingredients. Any ingredients that the user is missing from the recipe is automatically added to a shopping list to make it easy to reference when shopping. They can also view the instructions for for their chosen recipes.
+I will be building a recipe suggestion app based on the selections that a user makes. The app will ask the user what ingredients they currently have at home and then suggest relevant recipes based on matching ingredients. These matching recipes will be displayed in a list with how many matching ingredients each recipe has. Any ingredients that the user is missing from the recipe is automatically added to a shopping list to make it easier to reference when shopping. They will also be able to view the cooking instructions for each of their chosen recipes.
 
-The problem this app is solving is simple. It helps users quickly find recipes based on what ingredients they already have at home and reduces the amount of ingredients they have to go out and buy. This is necessary to prevent users from wasting time finding recipes that involve ingredients they dont have at home and prevents them from doubling up on ingredients that they already have.
+#### Why Build It
+
+This app helps users quickly find recipes based on what ingredients they already have at home and reduces the amount of ingredients they have to go out and buy. This prevents users from wasting time finding recipes that involve ingredients they dont have at home which is a very common and very frustrating problem. It also helps prevent them from doubling up on ingredients when shopping for multiple recipes as it tells the user exactly how much of each ingredient they need for each recipe.
 
 #### Target Audience
 
-The target audience is anyone who needs ideas for what to cook but don't want to have to go out and buy all of the ingredients.
+The target audience is anyone looking for ideas of what to cook based on the ingredients they already have at home and any ingredients that they need will be added to a handy shopping list for quick reference.
 
-The user will run the app and choose from a list of the ingredients selecting the ones they currently have at home. Then a list of relevant recipes will be shown and they will then choose the recipes they like from the matching options provided. Once they select the recipes they like they will be added to their recipes which they can view to see the cooking instructins. Now they will be able to view their shopping list which is based on items that they are missing.
+#### How To Use It
 
-### 2. List of Features
+Following the installation instructions above, and once all the dependencies have been installed, the application will run. Once the application is running users will be able to navigate through the menus using the directional arrows and the enter key. The app will also prompt the user to answer questions as necessary. Once the user has finished using the application they will be able to select "Exit" from the main menu to close the application.
 
-#### Menu Options
+### 2. Features
 
-When a user first runs the app they will be shown a list of menu items that they can interact with.
+When a user first runs the app they will be presented with an interactive menu of options displaying the following features:
+    - Select Ingredients - This is where you select ingredients you currently have at home. You can add or remove as many ingredients as you want.
+    - Matching Recipes - This shows a list of recipes that match your ingredients. You can select as many recipes as you want. You can also remove recipes if you change your mind.
+    - My Recipes - Here you can view your recipes and then select a recipe to view the cooking instructions for that recipe.
+    - Shoppig List - This is a list of all of the ingredients that are missing from your selected recipes.
+    - Exit - This will close the application.
 
-#### Select My Ingredients
+#### Select Ingredients
 
-Users can view a list of ingredients and select the ingredients that they currently have in their cupboard/fridge. Extra Credit - Users will be able to remove ingredients if they made a mistake or clear the entire list to start again.
+Users can view a list of ingredients that is populated from all available recipes. They will be able to select the ingredients that they currently have in their cupboard/fridge. Users will also be able to remove ingredients if they make a mistake or change their mind.
 
-#### View Matching Recipes
+#### Matching Recipes
 
-Once Users have selected their ingredients they will be able to view their matching recipes which will be populated based on how many ingredients match. The list will be sorted in descending order starting with recipes with the most matched ingredients. Users will be able to select as many recipes as they want and add them to their selected recipes.
+Once Users have selected their ingredients they will be able to view their matching recipes which will be populated based on how many of their selected ingredients match those of the recipes. The list will be sorted in descending order starting with recipes with the most matched ingredients. Users will be able to select as many recipes as they want and add them to their selected recipes (My Recipes).
 
-#### View My Recipes
+#### My Recipes
 
-Users will then be able to view a list of the recipes that they have selected select a recipe to view the instructions on how to cook it. Extra Credit - Users will be able to remove recipes if they made a mistake or clear the entire recipe list.
+Users will then be able to view the list of the recipes that they have selected. They will have the option to select an individual recipe and view the instructions on how to prepare and cook it. Users will be able to remove recipes if they made a mistake or change their mind.
 
-#### View Shopping List
+#### Shopping List
 
-Once user have added recipes they will be bale to view all of the ingredients required to make all of the recipes they have selected. Extra Credit - each ingredient on the shopping list will have the related recipe in brackets next to it for quick reference.
+Once users have added recipes they will be bale to view all of the missing ingredients that are required to make the recipes they have selected. Each ingredient on the shopping list will have the related recipe in brackets next to it for quick reference.
 
-### 3. User interaction and experience
+### 3. User Interaction and Experience
 
 The user will be greeted by a welcome screen and prompted to enter their name. Once they do this they will be given a greeting prompt explaining how to interact with the menu options. This will form the basis for all user interactions in the app.
 
@@ -56,9 +86,9 @@ The reason i am using TTY-Prompt for most of my user input is to simplify the us
 
 ### 4. Control Flow Diagram
 
-diagram must show the workflow/logic and/or integration of the features in your application for each feature
+![Terminal Application Control Flow Diagram](./docs/Terminal%20App%20Control%20Flow.png)
 
-utilise a recognised format or set of conventions for a control flow diagram, such as UML.
+Here is a [Link](https://whimsical.com/terminal-app-control-flow-XJLcP7uFDbPyKQayBbWVLs@7YNFXnKbYeumqm8HZNhB9) to my Control Flow Diagram on Whimsical. 
 
 ### 5. Implementation Plan
 
@@ -81,3 +111,14 @@ steps to install the application
 any dependancies required by the appication to operate
 
 any system/hardware requirements
+
+## Acknowledgements
+
+ - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [Awesome README](https://github.com/matiassingers/awesome-readme)
+ - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+
+
+## Support
+
+For support, email fake@fake.com or join our Slack channel.
