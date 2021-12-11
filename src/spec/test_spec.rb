@@ -72,10 +72,10 @@ describe "Test Recipe object" do
             ],
             8)]
         recipes = Recipes.new(individual_recipe)
-        expect(recipes.individual_ingredients.length).to be > 0
-        expect(recipes.individual_ingredients.length).to eq 2
-        expect(recipes.individual_ingredients[0].ingredients[1]["¼ cup melted butter"]).to eq(true)
-        expect(recipes.individual_ingredients[1].serves).to eq(8)
+        expect(recipes.individual_recipe.length).to be > 0
+        expect(recipes.individual_recipe.length).to eq 2
+        expect(recipes.individual_recipe[0].ingredients[1]["¼ cup melted butter"]).to eq(true)
+        expect(recipes.individual_recipe[1].serves).to eq(8)
     end
 end
 

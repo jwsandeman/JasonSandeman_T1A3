@@ -1,7 +1,13 @@
+require_relative "./individual_recipe"
+
 class Recipes
-    attr_reader :individual_ingredients
-    def initialize(individual_ingredients)
-        @individual_ingredients = individual_ingredients
+    attr_reader :individual_recipe
+    def initialize(individual_recipe)
+        @individual_recipe = individual_recipe
+    end
+
+    def display_ingredients
+        @individual_recipe.each {|item| return item.ingredients.flat_map(&:keys)}
     end
 
     def display_recipes
