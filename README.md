@@ -149,6 +149,12 @@ To help me organise this project and stick to my goals I hav used a Notion proje
 
 I used the Tasks board to keep track of any ideas, questions, bugs or general once-off taks that came to mind, whilst the Deliverables timeline was used to manage the project implementation plan and keep me accountable to my plan.
 
+![Documentation Timeline](./docs/tasks_board.png)
+![Documentation Timeline](./docs/documentation_timeline.png)
+![Presentation Timeline](./docs/presentation_timeline.png)
+![Code Timeline](./docs/code_timeline.png)
+![Submission Timeline](./docs/submission_timeline.png)
+
 outlines how each feature will be implemented and a checklist of tasks for each feature
 
 prioritise the implementation of different features, or checklist items within a feature
