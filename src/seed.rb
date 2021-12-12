@@ -5,11 +5,11 @@ def seed
     recipes = Recipes.new(
         [IndividualRecipe.new(
             "Roast Chicken", 
-            [
-            {"1.5kg whole chicken" => false},
-            {"¼ cup melted butter" => false},
-            {"3 fresh whole rosemary sprigs" => false}
-            ],
+            {
+            "1.5kg whole chicken" => false,
+            "¼ cup melted butter" => false,
+            "3 fresh whole rosemary sprigs" => false
+            },
             [
             "Preheat air fryer to 180C, for 4 minutes.",
             "Pat the chicken dry with paper towel.",
@@ -22,16 +22,16 @@ def seed
             4),
             IndividualRecipe.new(
             "Vegetarian Nachos Pies", 
-            [
-            {"400g can mixed beans drained" => false},
-            {"1 cup grated cheddar cheese" => false},
-            {"⅓ cup chopped shallots" => false},
-            {"1 medium red capsicum finely chopped" => false},
-            {"2 sheets puff pastry" => false},
-            {"1 handful tortilla chips" => false},
-            {"2 tbsp chopped coriander" => false},
-            {"8 jalapeños chopped" => false}
-            ],
+            {
+            "400g can mixed beans drained" => false,
+            "1 cup grated cheddar cheese" => false,
+            "⅓ cup chopped shallots" => false,
+            "1 medium red capsicum finely chopped" => false,
+            "2 sheets puff pastry" => false,
+            "1 handful tortilla chips" => false,
+            "2 tbsp chopped coriander" => false,
+            "8 jalapeños chopped" => false
+            },
             [
             "Mix beans, cheese,shallots and capsicum in a bowl.",
             "Set aside.",
@@ -47,13 +47,13 @@ def seed
             8),
             IndividualRecipe.new(
             "Fish Pie", 
-            [
-            {"800g frozen mixed vegetables thawed" => false},
-            {"2 tbsp plain flour" => false},
-            {"400g skinless smoked cod, trout or salmon 3cm pieces" => false},
-            {"1½ cups fish stock" => false},
-            {"3 sheets puff pastry" => false}
-            ],
+            {
+            "800g frozen mixed vegetables thawed" => false,
+            "2 tbsp plain flour" => false,
+            "400g skinless smoked cod, trout or salmon 3cm pieces" => false,
+            "1½ cups fish stock" => false,
+            "3 sheets puff pastry" => false
+            },
             [
             "In a non-stick frying pan over medium heat, sauté the veggies for 8 minutes or until soft and starting to brown.",
             "Sprinkle over flour and stir cooking for 1 minute or until well coated.",
@@ -69,12 +69,12 @@ def seed
             8),
             IndividualRecipe.new(
             "Italian Meatballs", 
-            [
-            {"500g beef mince" => false},
-            {"1 egg" => false},
-            {"¼ cup basil pesto plus extra to serve" => false},
-            {"500g jar pasta sauce" => false}
-            ],
+            {
+            "500g beef mince" => false,
+            "1 egg" => false,
+            "¼ cup basil pesto plus extra to serve" => false,
+            "500g jar pasta sauce" => false
+            },
             [
             "Combine mince, egg and basil pesto.",
             "Season then form in to 6cm meatballs.",
@@ -85,12 +85,12 @@ def seed
             4),
             IndividualRecipe.new(
             "Mediterranean Rosemary Skewers", 
-            [
-            {"8 fresh rosemary stalks 25cm long" => false},
-            {"4 medium lamb chops or steak" => false},
-            {"4 cloves garlic crushed" => false},
-            {"3 tablespoons fresh lemon juice and zest" => false}
-            ],
+            {
+            "8 fresh rosemary stalks 25cm long" => false,
+            "4 medium lamb chops or steak" => false,
+            "4 cloves garlic crushed" => false,
+            "3 tablespoons fresh lemon juice and zest" => false
+            },
             [
             "Remove the bottom two-thirds of rosemary leaves from each stalk and cut a sharp point into the end.",
             "Cut the lamb into chunks, then in a large bowl, combine lamb, garlic, lemon juice and zest with 2 tbsp. chopped rosemary leaves.",

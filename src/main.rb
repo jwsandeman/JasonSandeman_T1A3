@@ -1,7 +1,7 @@
 require_relative "./seed.rb"
 require "tty-prompt"
 
-recipes = seed
+$recipes = seed
 $prompt = TTY::Prompt.new
 
 # -----------------------------------------------------------------------------------------------------
@@ -22,13 +22,23 @@ def recipe_sub_menu
     return answer  
 end
 
-def display_ingredients_sub_menu(recipes)
-    answer = $prompt.select("What ingredients do you currently have at home? Press enter on an ingredient to add it to your list. You can add as many ingredients as you like", [recipes.display_ingredients, "Finished Adding Ingredients"])
+def add_ingredients_sub_menu
+    answer = $prompt.select("What ingredients do you currently have at home? Press enter on an ingredient to add it to your list. You can add as many ingredients as you like", [$recipes.display_ingredients, "Finished Adding Ingredients"])
     return answer  
 end
 
-def display_user_ingredients_sub_menu(user_ingredients)
-    answer = $prompt.select("What ingredients do you currently have at home? Press enter on an ingredient to add it to your list. You can add as many ingredients as you like", [user_ingredients, "Finished Adding Ingredients"])
+def remove_ingredients_sub_menu(user_ingredients)
+    answer = $prompt.select("What ingredients would you like to remove from your list? Press enter on an ingredient to remove it from your list. You can remove as many ingredients as you like", [user_ingredients, "Finished Removing Ingredients"])
+    return answer  
+end
+
+def add_recipes_sub_menu
+    answer = $prompt.select("What recipes would you like to add to your list? Press enter on a recipe to add it to your list. You can add as many recipes as you like", [$recipes.individual_recipe, "Finished Adding Recipes"])
+    return answer  
+end
+
+def remove_recipes_sub_menu(user_recipes)
+    answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [user_recipes, "Finished Removing Recipes"])
     return answer  
 end
 
@@ -37,20 +47,22 @@ end
 # -----------------------------------------------------------------------------------------------------
 def add_ingredients(ingredient, user_ingredients)
     system "clear"
-    if user_ingredients.find {|i| i == ingredient}
-        puts "You have already added that ingredient, please choose a different ingredient"
-    else
-        user_ingredients.push(ingredient)
+    if ingredient != "Finished Adding Ingredients"
+        if user_ingredients.find {|i| i == ingredient}
+            puts "You have already added that ingredient, please choose a different ingredient"
+        else
+            user_ingredients.push(ingredient)
+        end
     end
-    puts user_ingredients
-    # recipes.individual_recipe[0].ingredients[ingredient]= false
-    # puts recipes.individual_recipe[0].ingredients[ingredient]
+    # $recipes.individual_recipe.find {|item| puts item[ingredient] = false}
+    # puts $recipes.individual_recipe[0].ingredients[ingredient]
 end
 
 def remove_ingredients(ingredient, user_ingredients)
     system "clear"
-    user_ingredients.delete(ingredient)
-    puts user_ingredients
+    if ingredient != "Finished Removing Ingredients"
+        user_ingredients.delete(ingredient)
+    end
 end
 
 # -----------------------------------------------------------------------------------------------------
@@ -58,6 +70,24 @@ end
 # -----------------------------------------------------------------------------------------------------
 def matching_recipes
     
+end
+
+def add_recipes(recipe, user_recipes)
+    system "clear"
+    if recipe != "Finished Adding Recipes"
+        if user_recipes.find {|i| i == recipe}
+            puts "You have already added that recipe, please choose a different recipe"
+        else
+            user_recipes.push(recipe)
+        end
+    end
+end
+
+def remove_recipes(recipe, user_recipes)
+    system "clear"
+    if recipe != "Finished Removing Recipes"
+        user_recipes.delete(recipe)
+    end
 end
 
 # -----------------------------------------------------------------------------------------------------
@@ -83,6 +113,7 @@ system "clear"
 # puts "Thanks #{name}, now let's find some recipes to cook!"
 option = ""
 user_ingredients = []
+user_recipes = []
 while option != "Exit"
     option = main_menu
     case option
@@ -92,20 +123,58 @@ while option != "Exit"
                 add_remove_option = select_ingredient_sub_menu
                 case add_remove_option
                     when "Add Ingredients"
-                        ingredient = display_ingredients_sub_menu(recipes)
-                        add_ingredients(ingredient, user_ingredients)
+                        ingredient = ""
+                        while ingredient != "Finished Adding Ingredients"
+                            puts user_ingredients
+                            ingredient = add_ingredients_sub_menu
+                            add_ingredients(ingredient, user_ingredients)
+                        end
                     when "Remove Ingredients"
-                        ingredient = display_user_ingredients_sub_menu(user_ingredients)
-                        remove_ingredients(ingredient, user_ingredients)
+                        if user_ingredients != []
+                            ingredient = ""
+                            while ingredient != "Finished Removing Ingredients"
+                                puts user_ingredients
+                                ingredient = remove_ingredients_sub_menu(user_ingredients)
+                                remove_ingredients(ingredient, user_ingredients)
+                            end
+                        else
+                            puts "You need to add some ingredients first"
+                        end
                     else
                         next
                 end
-                # puts "Press enter key to go back to main menu"
-                # gets
-                # system "clear"
             end
         when "Matching Recipes"
-            puts "Here are your matching recipes"
+            if user_ingredients != []
+                add_remove_option = ""
+                while add_remove_option != "Go Back"
+                    add_remove_option = recipe_sub_menu
+                    case add_remove_option
+                        when "Add Recipe"
+                            recipe = ""
+                            while recipe != "Finished Adding Recipes"
+                                puts user_recipes
+                                recipe = add_recipes_sub_menu
+                                add_recipes(recipe, user_recipes)
+                            end
+                        when "Remove Recipe"
+                            if user_recipes != []
+                                recipe = ""
+                                while recipe != "Finished Removing Recipes"
+                                    puts user_recipes
+                                    recipe = remove_recipes_sub_menu(user_recipes)
+                                    remove_recipes(recipe, user_recipes)
+                                end
+                            else
+                                puts "You need to add some recipes first"
+                            end
+                        else
+                            next
+                    end
+                end
+            else
+                puts "You need to add some ingredients first before we can reccomend any recipes."
+            end
         when "My Recipes"
             puts "Here are the recipes you selected"
         when "Shopping List"
@@ -117,5 +186,5 @@ while option != "Exit"
     end
     # puts "Press enter key to go back to main menu"
     # gets
-    system "clear"
+    # system "clear"
 end

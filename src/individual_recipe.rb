@@ -9,7 +9,10 @@ class IndividualRecipe
     end
 
     def to_s
-        "#{@name}(Serves: #{@serves})"        
+        "#{@name} (#{serves} serves)"
+        # @ingredients.each do |item|
+        #     puts item
+        # end        
     end
 end
 
