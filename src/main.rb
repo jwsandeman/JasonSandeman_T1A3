@@ -66,6 +66,7 @@ def remove_ingredients(ingredient, user_ingredients)
     system "clear"
     if ingredient != "Finished Removing Ingredients"
         user_ingredients.delete(ingredient)
+        $recipes.individual_recipe.find {|item| item.ingredients[ingredient] = false}
     end
 end
 

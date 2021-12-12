@@ -1,12 +1,13 @@
 class IndividualRecipe
     attr_reader :name, :instructions, :serves
-    attr_accessor :ingredients
+    attr_accessor :ingredients, :selected_recipe
     def initialize(name, ingredients, instructions, serves)
         @name = name
         @instructions = instructions
         @ingredients = ingredients
         @serves = serves
         @selected_ingredients = 0
+        @selected_recipe = false
     end
 
     def to_s
