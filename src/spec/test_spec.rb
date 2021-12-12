@@ -124,17 +124,15 @@ describe "Test find ingredient" do
             "Serve with more crushed tortillas and a dollop of salsa and sour cream or your Guacamole."
             ],
             8)]
+        name = "Roast Chicken"
         recipes = Recipes.new(individual_recipe)
-        index = recipes.find_ingredient("1.5kg whole chicken")
-        expect(index).to eq 1
+        expect(recipes.display_recipe_method(name)).to eq("Roast Chicken (4 serves)")
+        # expect(recipes.individual_recipe.length).to eq 2
+        # expect(recipes.individual_recipe[0].ingredients["¼ cup melted butter"]).to eq(true)
+        # expect(recipes.individual_recipe[1].ingredients["⅓ cup chopped shallots"]=true).to eq(true)
+        # expect(recipes.individual_recipe[1].serves).to eq(8)
 
     end
-
-    # it "doesn't find a menu item in the array"  do
-    #     menu_items = [MenuItem.new("Latte", 4.0), MenuItem.new("Tea", 3.0)]
-    #     menu = Menu.new(menu_items)
-    #     expect(menu.find_item("Espresso")).to eq -1
-    # end
 end
 
 # name, ingredients, instructions, serves

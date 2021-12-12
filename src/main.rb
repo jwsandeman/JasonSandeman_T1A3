@@ -12,7 +12,7 @@ def main_menu
     return answer
 end
 
-def select_ingredient_sub_menu
+def ingredient_sub_menu
     answer = $prompt.select("Would you like to add or remove an ingredient from your list?", ["Add Ingredients", "Remove Ingredients","Go Back"])
     return answer  
 end
@@ -39,6 +39,11 @@ end
 
 def remove_recipes_sub_menu(user_recipes)
     answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [user_recipes, "Finished Removing Recipes"])
+    return answer  
+end
+
+def user_recipes_sub_menu(user_recipes)
+    answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [user_recipes, "Finished Viewing Recipes"])
     return answer  
 end
 
@@ -91,11 +96,11 @@ def remove_recipes(recipe, user_recipes)
 end
 
 # -----------------------------------------------------------------------------------------------------
-# MY INGREDIENTS FEATURE
+# MY Recipes FEATURE
 # -----------------------------------------------------------------------------------------------------
-def my_ingredients
-    
-end
+# def view_recipes(recipe)
+#     $recipes.display_recipe_method(recipe)
+# end
 
 # -----------------------------------------------------------------------------------------------------
 # SHOPPING LIST FEATURE
@@ -120,7 +125,7 @@ while option != "Exit"
         when "Select Ingredients"
             add_remove_option = ""
             while add_remove_option != "Go Back"
-                add_remove_option = select_ingredient_sub_menu
+                add_remove_option = ingredient_sub_menu
                 case add_remove_option
                     when "Add Ingredients"
                         ingredient = ""
@@ -176,7 +181,16 @@ while option != "Exit"
                 puts "You need to add some ingredients first before we can reccomend any recipes."
             end
         when "My Recipes"
-            puts "Here are the recipes you selected"
+            if user_recipes != []
+                recipe = ""
+                while recipe != "Finished Viewing Recipes"
+                    puts user_recipes
+                    recipe = user_recipes_sub_menu(user_recipes)
+                    puts $recipes.display_recipe_method(recipe)
+                end
+            else
+                puts "You need to add some recipes first."
+            end
         when "Shopping List"
                 puts "Here are the ingredients you need to buy"
         else

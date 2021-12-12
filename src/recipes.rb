@@ -25,6 +25,18 @@ class Recipes
         # end
     end
 
+    def display_recipe_method(recipe)
+        if @individual_recipe.find {|item| item.name == recipe}
+            return @individual_recipe.find {|item| item.name == recipe}
+            # return "#{@individual_recipe[name].name}"
+            # puts "Ingredients:"
+            # puts "#{@individual_recipe.ingredients.flat_map(&:keys)}"
+            # puts "Instructions:"
+            # puts "#{@individual_recipe.instructions.each {|item| puts item}}"
+            # puts "Serves #{@individual_recipe.serves}"  
+        end      
+    end
+
     def display_recipes
         
     end

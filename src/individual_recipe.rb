@@ -14,5 +14,6 @@ class IndividualRecipe
         #     puts item
         # end        
     end
+
 end
 
