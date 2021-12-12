@@ -6,14 +6,19 @@ class IndividualRecipe
         @instructions = instructions
         @ingredients = ingredients
         @serves = serves
+        @selected_ingredients = 0
     end
 
     def to_s
-        "#{@name} (#{serves} serves)"
-        # @ingredients.each do |item|
-        #     puts item
-        # end        
+        "#{@name} (you have #{@selected_ingredients} ingredients)"
     end
-
+    def selected_ingredients
+        @ingredients.each do |item|
+            if item.has_value?(true)
+                @selected_ingredients += 1
+            end
+        end
+        puts "Selected Ingredients:#{@selected_ingredients}"
+    end
 end
 

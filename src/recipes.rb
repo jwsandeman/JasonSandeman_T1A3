@@ -7,22 +7,24 @@ class Recipes
     end
 
     def display_ingredients
-        # available_ingredients = []
-        # @individual_recipe.each do |item|
-        #     available_ingredients = puts item.ingredients.keys
-        # end
-        # available_ingredients
-
+        available_ingredients = []
         @individual_recipe.each do |item|
-            return item.ingredients.keys
+            available_ingredients.push(item.ingredients.keys)
         end
+        return available_ingredients
+    end
 
-        # flat_map(&:keys)
-
-        # @individual_recipe.map do |item|
-        #     item.select do |key, value|
-        #         [].include? key
-        # end
+    def display_missing_ingredients
+        selected_ingredients = []
+        missing_ingredients = []
+        @individual_recipe.each do |item|
+            # missing_ingredients.push(item.ingredients.keys.select{|k, v| v == false})
+            selected_ingredients.push(item.ingredients.select {|k, v| v == false})
+        end
+        selected_ingredients.each do |i|
+            missing_ingredients.push(i.keys)
+        end
+        return missing_ingredients
     end
 
     def display_recipe_method(recipe)
@@ -39,15 +41,6 @@ class Recipes
 
     def display_recipes
         
-    end
-
-    def find_ingredient(ingredient)
-        @individual_recipe.each do |item, index|
-            if item.ingredients.keys == ingredient
-                return index
-            end
-        end
-        return -1
     end
 
     def add_recipe

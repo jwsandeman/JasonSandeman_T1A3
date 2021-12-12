@@ -80,14 +80,14 @@ describe "Test Recipe object" do
     end
 end
 
-describe "Test find ingredient" do
-    it "finds an ingredient in the array" do
+describe "Test matching ingredients" do
+    it "returns a number of selected ingredients" do
         individual_recipe = [IndividualRecipe.new(
             "Roast Chicken",
             {
-            "1.5kg whole chicken" => false,
+            "1.5kg whole chicken" => true,
             "¼ cup melted butter" => true,
-            "3 fresh whole rosemary sprigs" => false
+            "3 fresh whole rosemary sprigs" => true
             },
             [
             "Preheat air fryer to 180C, for 4 minutes.",
@@ -124,13 +124,8 @@ describe "Test find ingredient" do
             "Serve with more crushed tortillas and a dollop of salsa and sour cream or your Guacamole."
             ],
             8)]
-        name = "Roast Chicken"
         recipes = Recipes.new(individual_recipe)
-        expect(recipes.display_recipe_method(name)).to eq("Roast Chicken (4 serves)")
-        # expect(recipes.individual_recipe.length).to eq 2
-        # expect(recipes.individual_recipe[0].ingredients["¼ cup melted butter"]).to eq(true)
-        # expect(recipes.individual_recipe[1].ingredients["⅓ cup chopped shallots"]=true).to eq(true)
-        # expect(recipes.individual_recipe[1].serves).to eq(8)
+        expect(recipes.individual_recipe.selected_ingredients).to eq("Selected Ingredients:#{@selected_ingredients}")
 
     end
 end

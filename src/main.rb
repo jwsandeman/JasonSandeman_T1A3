@@ -53,14 +53,13 @@ end
 def add_ingredients(ingredient, user_ingredients)
     system "clear"
     if ingredient != "Finished Adding Ingredients"
-        if user_ingredients.find {|i| i == ingredient}
+        if user_ingredients.find {|item| item == ingredient}
             puts "You have already added that ingredient, please choose a different ingredient"
         else
             user_ingredients.push(ingredient)
+            $recipes.individual_recipe.find {|item| item.ingredients[ingredient] = true}
         end
     end
-    # $recipes.individual_recipe.find {|item| puts item[ingredient] = false}
-    # puts $recipes.individual_recipe[0].ingredients[ingredient]
 end
 
 def remove_ingredients(ingredient, user_ingredients)
@@ -96,7 +95,7 @@ def remove_recipes(recipe, user_recipes)
 end
 
 # -----------------------------------------------------------------------------------------------------
-# MY Recipes FEATURE
+# MY RECIPES FEATURE
 # -----------------------------------------------------------------------------------------------------
 # def view_recipes(recipe)
 #     $recipes.display_recipe_method(recipe)
@@ -193,6 +192,10 @@ while option != "Exit"
             end
         when "Shopping List"
                 puts "Here are the ingredients you need to buy"
+                puts $recipes.display_missing_ingredients
+                puts "press enter to go back to the main menu"
+                gets
+                system "clear"
         else
             system "clear"
             puts "Thanks for stopping by!"
