@@ -20,9 +20,11 @@ class Recipes
         missing_ingredients = []
         @individual_recipe.each do |i|
             if i.selected_recipe == true
-                selected_recipes.push(i.ingredients)
+                # selected_recipes.push(i)
+                selected_recipes.push(i.name)
             end
         end
+        # return selected_recipes.each {|i| i[0]}
         return selected_recipes
     end
 
@@ -36,8 +38,8 @@ class Recipes
             unselected_ingredients.push(item.select {|k, v| v == false})
         end
         unselected_ingredients.each do |i|
-            missing_ingredients.push(i.keys)
-            # missing_ingredients.push(i.flat_map(&:keys))
+        missing_ingredients.push(i.keys)
+        # missing_ingredients.push(i.flat_map(&:keys))
         end
         return missing_ingredients
     end

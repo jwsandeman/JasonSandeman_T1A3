@@ -42,8 +42,13 @@ def remove_recipes_sub_menu(user_recipes)
     return answer  
 end
 
+# def user_recipes_sub_menu(user_recipes)
+#     answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [user_recipes, "Finished Viewing Recipes"])
+#     return answer  
+# end
+# trialling this function with select_recipes function
 def user_recipes_sub_menu(user_recipes)
-    answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [user_recipes, "Finished Viewing Recipes"])
+    answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [$recipes.selected_recipes, "Finished Viewing Recipes"])
     return answer  
 end
 
@@ -74,16 +79,24 @@ end
 # MATCHING RECIPES FEATURE
 # -----------------------------------------------------------------------------------------------------
 def matching_recipes
-    
+    $recipes.individual_recipe.each do |item|
+        item.selected_ingredients
+    end
 end
 
 def add_recipes(recipe, user_recipes)
     system "clear"
     if recipe != "Finished Adding Recipes"
-        if user_recipes.find {|i| i == recipe}
+        if user_recipes.find {|item| item == recipe}
             puts "You have already added that recipe, please choose a different recipe"
         else
             user_recipes.push(recipe)
+            # need to test this code
+            if $recipes.individual_recipe.each do |item|
+                item.name == recipe
+                   item.selected_recipe = true
+                end
+            end
         end
     end
 end
@@ -157,6 +170,7 @@ while option != "Exit"
                     case add_remove_option
                         when "Add Recipe"
                             recipe = ""
+                            matching_recipes
                             while recipe != "Finished Adding Recipes"
                                 puts user_recipes
                                 recipe = add_recipes_sub_menu
@@ -186,14 +200,16 @@ while option != "Exit"
                 while recipe != "Finished Viewing Recipes"
                     puts user_recipes
                     recipe = user_recipes_sub_menu(user_recipes)
-                    puts $recipes.display_recipe_method(recipe)
+                    # puts $recipes.display_recipe_method(recipe)
                 end
             else
                 puts "You need to add some recipes first."
             end
         when "Shopping List"
+                selected_recipes = []
+                selected_recipes = $recipes.selected_recipes
                 puts "Here are the ingredients you need to buy"
-                puts $recipes.display_missing_ingredients
+                puts $recipes.display_missing_ingredients(selected_recipes)
                 puts "press enter to go back to the main menu"
                 gets
                 system "clear"
