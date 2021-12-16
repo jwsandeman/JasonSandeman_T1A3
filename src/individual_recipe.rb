@@ -15,6 +15,7 @@ class IndividualRecipe
         "#{@name} (you have #{@selected_ingredients}/#{@ingredients.length} ingredients)"
     end
 
+    # increments @selected_ingrdients every time an ingredient is selected. Needs more testing as its only incrementing in the first recipe
     def selected_ingredients
         @ingredients.each do |k, v|
             # if item.has_value?(true)
@@ -25,5 +26,16 @@ class IndividualRecipe
         # used below return for test case
         return @selected_ingredients
     end
+
+    # prints the full recipe method
+    def print_full_recipe
+        "#{@name}"
+        puts "Ingredients:"
+        "#{@ingredients.each{|k, v| puts k}}"
+        puts "Instructions:"
+        "#{@instructions.each{|i| puts i}}"
+        "Serves: #{@serves}" 
+    end
+
 end
 

@@ -42,15 +42,16 @@ def remove_recipes_sub_menu(user_recipes)
     return answer  
 end
 
-# def user_recipes_sub_menu(user_recipes)
-#     answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [user_recipes, "Finished Viewing Recipes"])
-#     return answer  
-# end
-# trialling this function with select_recipes function
 def user_recipes_sub_menu(user_recipes)
-    answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [$recipes.selected_recipes, "Finished Viewing Recipes"])
+    answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [user_recipes, "Finished Viewing Recipes"])
     return answer  
 end
+# trialling this function with select_recipes function
+# may not need this function as it does exactly the same thing as returning the user_recipes array. ill probably adjust the function to display ingredients as needed for the shopping list.
+# def user_recipes_sub_menu(user_recipes)
+#     answer = $prompt.select("What recipes would you like to remove from your list? Press enter on a recipe to remove it from your list. You can remove as many recipes as you like", [$recipes.selected_recipes, "Finished Viewing Recipes"])
+#     return answer  
+# end
 
 # -----------------------------------------------------------------------------------------------------
 # SELECT INGREDIENTS FEATURE
@@ -78,7 +79,9 @@ end
 # -----------------------------------------------------------------------------------------------------
 # MATCHING RECIPES FEATURE
 # -----------------------------------------------------------------------------------------------------
+# this is not working properly as it is only incrementing over 1 recipe
 def matching_recipes
+    # need to test this - may not even need it
     $recipes.individual_recipe.each do |item|
         item.selected_ingredients
     end
@@ -101,19 +104,28 @@ def add_recipes(recipe, user_recipes)
     end
 end
 
-def remove_recipes(recipe, user_recipes)
-    system "clear"
-    if recipe != "Finished Removing Recipes"
-        user_recipes.delete(recipe)
-    end
-end
-
 # -----------------------------------------------------------------------------------------------------
 # MY RECIPES FEATURE
 # -----------------------------------------------------------------------------------------------------
 # def view_recipes(recipe)
 #     $recipes.display_recipe_method(recipe)
 # end
+
+def display_entire_recipe(recipe, user_recipes)
+    system "clear"
+    if recipe != "Finished Viewing Recipes"
+        if user_recipes.find {|item| item == recipe}
+            $recipes.individual_recipe.find {|item| item.print_full_recipe}
+        end
+    end
+end
+
+def remove_recipes(recipe, user_recipes)
+    system "clear"
+    if recipe != "Finished Removing Recipes"
+        user_recipes.delete(recipe)
+    end
+end
 
 # -----------------------------------------------------------------------------------------------------
 # SHOPPING LIST FEATURE
@@ -200,7 +212,10 @@ while option != "Exit"
                 while recipe != "Finished Viewing Recipes"
                     puts user_recipes
                     recipe = user_recipes_sub_menu(user_recipes)
-                    # puts $recipes.display_recipe_method(recipe)
+                    display_entire_recipe(recipe, user_recipes)
+                    puts "Press 'Enter' to go back"
+                    gets
+                    # system "clear"
                 end
             else
                 puts "You need to add some recipes first."
@@ -209,8 +224,8 @@ while option != "Exit"
                 selected_recipes = []
                 selected_recipes = $recipes.selected_recipes
                 puts "Here are the ingredients you need to buy"
-                puts $recipes.display_missing_ingredients(selected_recipes)
-                puts "press enter to go back to the main menu"
+                puts $recipes.display_missing_ingredients #(selected_recipes)
+                puts "press enter to go back"
                 gets
                 system "clear"
         else

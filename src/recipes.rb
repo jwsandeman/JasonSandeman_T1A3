@@ -6,6 +6,7 @@ class Recipes
         @individual_recipe = individual_recipe
     end
 
+    # Displays all ingredients from all available recipes
     def display_ingredients
         available_ingredients = []
         @individual_recipe.each do |item|
@@ -14,7 +15,7 @@ class Recipes
         return available_ingredients
     end
 
-    # finds the recipes that the user has selected based on the selected_recipe attrbute being set to true and returns an array of ingredients
+    # finds the recipes that the user has selected based on the selected_recipe attrbute being set to true and returns an array of recipe names - dont really need to return the ams anymor ebut i will need to return the ingrdients for the shopping list - maybe this function could be moved into main to help it work with display_missing_ingredients better
     def selected_recipes
         selected_recipes = []
         missing_ingredients = []
@@ -29,32 +30,30 @@ class Recipes
     end
 
     # displays all of the ingredients that have values set to false meaning the user has not selected them
-    def display_missing_ingredients(ingredients)
+    def display_missing_ingredients #(ingredients)
         unselected_ingredients = []
         missing_ingredients = []
-        ingredients.each do |item|
-        # @individual_recipe.each do |item|
-            # missing_ingredients.push(item.ingredients.keys.select{|k, v| v == false})
-            unselected_ingredients.push(item.select {|k, v| v == false})
+        # ingredients.each do |item|
+        @individual_recipe.each do |item|
+            unselected_ingredients.push(item.ingredients.select {|k, v| v == false})
         end
         unselected_ingredients.each do |i|
-        missing_ingredients.push(i.keys)
-        # missing_ingredients.push(i.flat_map(&:keys))
+            missing_ingredients.push(i.keys)
         end
         return missing_ingredients
     end
 
-    def display_recipe_method(recipe)
-        if @individual_recipe.find {|item| item.name == recipe}
-            return @individual_recipe.find {|item| item.name == recipe}
-            # return "#{@individual_recipe[name].name}"
-            # puts "Ingredients:"
-            # puts "#{@individual_recipe.ingredients.flat_map(&:keys)}"
-            # puts "Instructions:"
-            # puts "#{@individual_recipe.instructions.each {|item| puts item}}"
-            # puts "Serves #{@individual_recipe.serves}"  
-        end      
-    end
+    # def display_recipe_method(recipe)
+    #     if @individual_recipe.find {|item| item.name == recipe}
+    #         return @individual_recipe.find {|item| item.name == recipe}
+    #         # return "#{@individual_recipe[name].name}"
+    #         # puts "Ingredients:"
+    #         # puts "#{@individual_recipe.ingredients.flat_map(&:keys)}"
+    #         # puts "Instructions:"
+    #         # puts "#{@individual_recipe.instructions.each {|item| puts item}}"
+    #         # puts "Serves #{@individual_recipe.serves}"  
+    #     end      
+    # end
 
     def display_recipes
         
