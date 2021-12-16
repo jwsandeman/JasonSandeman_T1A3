@@ -6,7 +6,7 @@ class Recipes
         @individual_recipe = individual_recipe
     end
 
-    # Displays all ingredients from all available recipes
+    # MANUALLY TESTED - displays all ingredients from all available recipes
     def display_ingredients
         available_ingredients = []
         @individual_recipe.each do |item|
@@ -15,65 +15,46 @@ class Recipes
         return available_ingredients
     end
 
-    # finds the recipes that the user has selected based on the selected_recipe attrbute being set to true and returns an array of recipe names - dont really need to return the ams anymor ebut i will need to return the ingrdients for the shopping list - maybe this function could be moved into main to help it work with display_missing_ingredients better
+    # TESTED - finds the recipes that the user has selected based on the selected_recipe attrbute being set to true and returns an array of recipe ingredients - maybe this function could be moved into main to help it work with display_missing_ingredients better
     def selected_recipes
         selected_recipes = []
-        missing_ingredients = []
         @individual_recipe.each do |i|
             if i.selected_recipe == true
-                # selected_recipes.push(i)
-                selected_recipes.push(i.name)
+                selected_recipes.push(i.ingredients.each{|k, v| k})
             end
         end
-        # return selected_recipes.each {|i| i[0]}
         return selected_recipes
     end
 
     # displays all of the ingredients that have values set to false meaning the user has not selected them
-    def display_missing_ingredients #(ingredients)
+    def display_missing_ingredients(ingredients)
         unselected_ingredients = []
         missing_ingredients = []
-        # ingredients.each do |item|
-        @individual_recipe.each do |item|
-            unselected_ingredients.push(item.ingredients.select {|k, v| v == false})
+        ingredients.each do |item|
+        # @individual_recipe.each do |item|
+            # unselected_ingredients.push(item.ingredients.select {|k, v| v == false})
+            unselected_ingredients.push(item.select {|k, v| v == false})
         end
-        unselected_ingredients.each do |i|
-            missing_ingredients.push(i.keys)
-        end
-        return missing_ingredients
+        # missing_ingredients.push(unselected_ingredients.each {|k, v| k})
+        # unselected_ingredients.each {|k, v| puts k}
+        # unselected_ingredients.each do |k, v|
+        #     missing_ingredients.push(k)
+        # end
+        # return missing_ingredients
+        return unselected_ingredients
     end
 
-    # def display_recipe_method(recipe)
-    #     if @individual_recipe.find {|item| item.name == recipe}
-    #         return @individual_recipe.find {|item| item.name == recipe}
-    #         # return "#{@individual_recipe[name].name}"
-    #         # puts "Ingredients:"
-    #         # puts "#{@individual_recipe.ingredients.flat_map(&:keys)}"
-    #         # puts "Instructions:"
-    #         # puts "#{@individual_recipe.instructions.each {|item| puts item}}"
-    #         # puts "Serves #{@individual_recipe.serves}"  
-    #     end      
-    # end
-
-    def display_recipes
-        
-    end
-
-    def find_ingredient(ingredient)
-        @individual_recipe.each do |item, index|
-            if item.ingredients.keys == ingredient
-                return index
+    # TESTED - i used this to test my function inside main.rb
+    def ingredient_select(ingredient)
+        @individual_recipe.each_with_index do |item, index|
+            if item.ingredients.has_key?(ingredient)
+                item.ingredients[ingredient] = true
+                # these were only used for the rspec test
+                # return item.ingredients[ingredient]
+                # return ingredient
+                # return index
             end
         end
-        return -1
-    end
-
-    def add_recipe
-        
-    end
-
-    def remove_recipe
-        
     end
 
 end

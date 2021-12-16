@@ -62,8 +62,14 @@ def add_ingredients(ingredient, user_ingredients)
         if user_ingredients.find {|item| item == ingredient}
             puts "You have already added that ingredient, please choose a different ingredient"
         else
+            # this piece of code is causing bugs need to investigate
             user_ingredients.push(ingredient)
-            $recipes.individual_recipe.find {|item| item.ingredients[ingredient] = true}
+            # TESTED
+            $recipes.individual_recipe.each_with_index do |item, index|
+                if item.ingredients.has_key?(ingredient)
+                    item.ingredients[ingredient] = true
+                end
+            end
         end
     end
 end
@@ -72,14 +78,19 @@ def remove_ingredients(ingredient, user_ingredients)
     system "clear"
     if ingredient != "Finished Removing Ingredients"
         user_ingredients.delete(ingredient)
-        $recipes.individual_recipe.find {|item| item.ingredients[ingredient] = false}
+        # TESTED
+        $recipes.individual_recipe.each_with_index do |item, index|
+            if item.ingredients.has_key?(ingredient)
+                item.ingredients[ingredient] = false
+            end
+        end
     end
 end
 
 # -----------------------------------------------------------------------------------------------------
 # MATCHING RECIPES FEATURE
 # -----------------------------------------------------------------------------------------------------
-# this is not working properly as it is only incrementing over 1 recipe
+# this is not working properly as it is only incrementing over 1 recipe. now it seems to be working?? what did i change.. no idea.
 def matching_recipes
     # need to test this - may not even need it
     $recipes.individual_recipe.each do |item|
@@ -95,9 +106,12 @@ def add_recipes(recipe, user_recipes)
         else
             user_recipes.push(recipe)
             # need to test this code
-            if $recipes.individual_recipe.each do |item|
-                item.name == recipe
-                   item.selected_recipe = true
+            # if $recipes.individual_recipe.each_with_index do |item|
+            $recipes.individual_recipe.each_with_index do |item, index|
+                # this won't work because tty-prompt is passing default recipe name which includes matching ingredients.
+                if item.name == recipe
+                    # return index
+                    item.selected_recipe = true
                 end
             end
         end
@@ -107,10 +121,8 @@ end
 # -----------------------------------------------------------------------------------------------------
 # MY RECIPES FEATURE
 # -----------------------------------------------------------------------------------------------------
-# def view_recipes(recipe)
-#     $recipes.display_recipe_method(recipe)
-# end
 
+# this is not working as intended
 def display_entire_recipe(recipe, user_recipes)
     system "clear"
     if recipe != "Finished Viewing Recipes"
@@ -124,6 +136,12 @@ def remove_recipes(recipe, user_recipes)
     system "clear"
     if recipe != "Finished Removing Recipes"
         user_recipes.delete(recipe)
+        $recipes.individual_recipe.each_with_index do |item, index|
+            if item.name == recipe
+                # return index
+                item.selected_recipe = false
+            end
+        end
     end
 end
 
@@ -131,7 +149,7 @@ end
 # SHOPPING LIST FEATURE
 # -----------------------------------------------------------------------------------------------------
 def shopping_list
-    
+    $recipes.selected_recipes
 end
 
 # -----------------------------------------------------------------------------------------------------
@@ -153,19 +171,20 @@ while option != "Exit"
                 add_remove_option = ingredient_sub_menu
                 case add_remove_option
                     when "Add Ingredients"
-                        ingredient = ""
-                        while ingredient != "Finished Adding Ingredients"
+                        added_ingredient = ""
+                        while added_ingredient != "Finished Adding Ingredients"
                             puts user_ingredients
-                            ingredient = add_ingredients_sub_menu
-                            add_ingredients(ingredient, user_ingredients)
+                            # puts $recipes.display_ingredients
+                            added_ingredient = add_ingredients_sub_menu
+                            add_ingredients(added_ingredient, user_ingredients)
                         end
                     when "Remove Ingredients"
                         if user_ingredients != []
-                            ingredient = ""
-                            while ingredient != "Finished Removing Ingredients"
+                            removed_ingredient = ""
+                            while removed_ingredient != "Finished Removing Ingredients"
                                 puts user_ingredients
-                                ingredient = remove_ingredients_sub_menu(user_ingredients)
-                                remove_ingredients(ingredient, user_ingredients)
+                                removed_ingredient = remove_ingredients_sub_menu(user_ingredients)
+                                remove_ingredients(removed_ingredient, user_ingredients)
                             end
                         else
                             puts "You need to add some ingredients first"
@@ -221,10 +240,11 @@ while option != "Exit"
                 puts "You need to add some recipes first."
             end
         when "Shopping List"
-                selected_recipes = []
-                selected_recipes = $recipes.selected_recipes
+                selected_recipes_list = []
+                # selected_recipes_list = shopping_list
+                puts $recipes.selected_recipes
                 puts "Here are the ingredients you need to buy"
-                puts $recipes.display_missing_ingredients #(selected_recipes)
+                # puts $recipes.display_missing_ingredients(selected_recipes_list)
                 puts "press enter to go back"
                 gets
                 system "clear"
