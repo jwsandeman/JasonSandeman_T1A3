@@ -173,11 +173,13 @@ any dependancies required by the appication to operate
 
 any system/hardware requirements
 
-## Acknowledgements
+## Attribution
 
 - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
 - [Awesome README](https://github.com/matiassingers/awesome-readme)
 - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+- Ruby Gem [TTY-Prompt](https://github.com/piotrmurach/tty-prompt)
+- Ruby Gem [Colorize](https://github.com/fazibear/colorize)
 
 ## Support
 

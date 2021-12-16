@@ -45,7 +45,7 @@ class Recipes
         # return unselected_ingredients
     end
 
-    # TESTED - i used this to test my function inside main.rb
+    # TESTED - this is redundant code as it was only used to confirm a test before being used inside main.rb
     def ingredient_select(ingredient)
         @individual_recipe.each_with_index do |item, index|
             if item.ingredients.has_key?(ingredient)
@@ -58,6 +58,7 @@ class Recipes
         end
     end
 
+    # TESTED - this is redundant code as it was only used to confirm a test before being used inside main.rb
     def testing_string(name)
         @individual_recipe.each do |item|
             if name.include? item.name

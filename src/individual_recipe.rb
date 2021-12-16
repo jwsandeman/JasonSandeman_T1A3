@@ -1,3 +1,5 @@
+require 'colorize'
+
 class IndividualRecipe
     attr_reader :name, :instructions, :serves
     attr_accessor :ingredients, :selected_recipe, :selected_ingredients
@@ -30,11 +32,11 @@ class IndividualRecipe
     # MANUALLY TESTED - prints the full recipe method
     def print_full_recipe
         "#{@name}"
-        puts "Ingredients:"
+        puts "Ingredients:".colorize(:cyan)
         "#{@ingredients.each{|k, v| puts k}}"
-        puts "Instructions:"
+        puts "Instructions:".colorize(:cyan)
         "#{@instructions.each{|i| puts i}}"
-        "Serves: #{@serves}" 
+        "Serves: #{@serves}"
     end
 
 end
