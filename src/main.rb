@@ -34,7 +34,7 @@ end
 
 def add_recipes_sub_menu
     answer = $prompt.select("What recipes would you like to add to your list? Press enter on a recipe to add it to your list. You can add as many recipes as you like", [$recipes.individual_recipe, "Finished Adding Recipes"])
-    return answer  
+    return answer.to_s
 end
 
 def remove_recipes_sub_menu(user_recipes)
@@ -105,12 +105,9 @@ def add_recipes(recipe, user_recipes)
             puts "You have already added that recipe, please choose a different recipe"
         else
             user_recipes.push(recipe)
-            # need to test this code
-            # if $recipes.individual_recipe.each_with_index do |item|
-            $recipes.individual_recipe.each_with_index do |item, index|
-                # this won't work because tty-prompt is passing default recipe name which includes matching ingredients.
-                if item.name == recipe
-                    # return index
+            # TESTED
+            $recipes.individual_recipe.each do |item|
+                if recipe.include? item.name
                     item.selected_recipe = true
                 end
             end
@@ -127,7 +124,12 @@ def display_entire_recipe(recipe, user_recipes)
     system "clear"
     if recipe != "Finished Viewing Recipes"
         if user_recipes.find {|item| item == recipe}
-            $recipes.individual_recipe.find {|item| item.print_full_recipe}
+            # $recipes.individual_recipe.find {|item| item.print_full_recipe}
+            $recipes.individual_recipe.each do |item|
+                if recipe.include? item.name
+                    item.print_full_recipe
+                end
+            end
         end
     end
 end
@@ -136,9 +138,9 @@ def remove_recipes(recipe, user_recipes)
     system "clear"
     if recipe != "Finished Removing Recipes"
         user_recipes.delete(recipe)
-        $recipes.individual_recipe.each_with_index do |item, index|
-            if item.name == recipe
-                # return index
+        # NEED TO TEST
+        $recipes.individual_recipe.each do |item|
+            if recipe.include? item.name
                 item.selected_recipe = false
             end
         end
@@ -148,9 +150,9 @@ end
 # -----------------------------------------------------------------------------------------------------
 # SHOPPING LIST FEATURE
 # -----------------------------------------------------------------------------------------------------
-def shopping_list
-    $recipes.selected_recipes
-end
+# def shopping_list
+#     $recipes.selected_recipes
+# end
 
 # -----------------------------------------------------------------------------------------------------
 # WELCOME SCREEN AND MAIN MENU LOGIC
@@ -241,10 +243,10 @@ while option != "Exit"
             end
         when "Shopping List"
                 selected_recipes_list = []
-                # selected_recipes_list = shopping_list
-                puts $recipes.selected_recipes
+                selected_recipes_list = $recipes.selected_recipes
+                # puts $recipes.selected_recipes
                 puts "Here are the ingredients you need to buy"
-                # puts $recipes.display_missing_ingredients(selected_recipes_list)
+                $recipes.display_missing_ingredients(selected_recipes_list)
                 puts "press enter to go back"
                 gets
                 system "clear"

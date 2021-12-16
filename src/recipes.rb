@@ -26,7 +26,7 @@ class Recipes
         return selected_recipes
     end
 
-    # displays all of the ingredients that have values set to false meaning the user has not selected them
+    # TESTED - displays all of the ingredients that have their values set to false (meaning the user has not selected those ingredients)
     def display_missing_ingredients(ingredients)
         unselected_ingredients = []
         missing_ingredients = []
@@ -36,12 +36,13 @@ class Recipes
             unselected_ingredients.push(item.select {|k, v| v == false})
         end
         # missing_ingredients.push(unselected_ingredients.each {|k, v| k})
+        missing_ingredients.push(unselected_ingredients.each{|i| puts i.keys})
         # unselected_ingredients.each {|k, v| puts k}
         # unselected_ingredients.each do |k, v|
         #     missing_ingredients.push(k)
         # end
-        # return missing_ingredients
-        return unselected_ingredients
+        return missing_ingredients
+        # return unselected_ingredients
     end
 
     # TESTED - i used this to test my function inside main.rb
@@ -57,4 +58,12 @@ class Recipes
         end
     end
 
+    def testing_string(name)
+        @individual_recipe.each do |item|
+            if name.include? item.name
+                item.selected_recipe = true
+                return item.selected_recipe
+            end
+        end
+    end
 end
