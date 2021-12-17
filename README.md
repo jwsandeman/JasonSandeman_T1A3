@@ -26,17 +26,35 @@ Go to the project directory:
   cd JasonSandeman_T1A3/src
 ```
 
-Installs ruby gem dependencies and runs application:
+Installs ruby gem dependencies:
 
 ```bash
   ./install.sh
+```
+
+Runs the application:
+
+```bash
+  ruby main.rb
+```
+
+Alternatively you can give the app a head start by passing in your name with the run command for example:
+
+```bash
+   ruby main.rb "John Connor"
 ```
 
 ## Troubleshooting
 
 To run this application on your computer you will need access to your terminal with the correct permissions enabled so that you run bash commands from the terminal.
 
-You will also need ruby installed which be done following these [instructions](https://www.ruby-lang.org/en/downloads/).
+If you get a permission error when trying to run the install command you can use the following command to change your permissions. After that you should be able to run the install command above.
+
+```bash
+   chmod +x ./install.sh
+```
+
+You will also need ruby installed which be done following these [instructions](https://www.ruby-lang.org/en/downloads/). There are instructions for Linux, Mac and Windows users.
 
 If you are having trouble getting the app to run make sure you have the following dependencies and their correct versions. Check the gemfile to make sure the your gems are using a similar version (if the last and second last version numbers are different that should still be fine.) and update them in the Gemfile in the './src' directory if necessary.
 
@@ -45,19 +63,27 @@ If you are having trouble getting the app to run make sure you have the followin
 ```
 
 ```bash
-gem 'tty-prompt', '~> 0.23.1'
+   gem 'tty-prompt', '~> 0.23.1'
 ```
 
 ```bash
-gem 'rspec', '~> 3.10'
+   gem 'rspec', '~> 3.10'
 ```
 
 ```bash
-gem 'artii', '~> 2.1', '>= 2.1.2'
+   gem 'artii', '~> 2.1', '>= 2.1.2'
 ```
 
 ```bash
-gem 'rubocop', '~> 1.23'
+   gem 'rubocop', '~> 1.23'
+```
+
+```bash
+   gem 'tty-progressbar', '~> 0.18.2'
+```
+
+```bash
+   gem 'faker', '~> 2.19'
 ```
 
 ## 1. Purpose & Scope
@@ -215,6 +241,7 @@ Most of my tests were carried out using RSpec which can be found in the src code
 - Ruby Gem [Artii](https://github.com/miketierney/artii)
 - Ruby Gem [Rubocop](https://github.com/rubocop/rubocop)
 - Ruby Gem [Faker](https://github.com/faker-ruby/faker)
+- Ruby Gem [Tty-progressbar](https://github.com/piotrmurach/tty-progressbar)
 - Awesome Readme [Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
 
 ## Contact
