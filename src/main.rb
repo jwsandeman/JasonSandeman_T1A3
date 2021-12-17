@@ -27,7 +27,7 @@ end
 
 def add_ingredients_sub_menu
   $prompt.select(
-    'What ingredients do you currently have at home? You can add as many ingredients as you like. Scroll down for more options.'.colorize(:cyan), [
+    'What ingredients do you currently have at home? You can add as many ingredients as you like. Scroll down for more options. Once you are done adding ingredients you can select "Finished Adding Ingredients to go back.'.colorize(:cyan), [
       $recipes.display_ingredients, 'Finished Adding Ingredients'
     ]
   )
@@ -69,6 +69,8 @@ end
 # -----------------------------------------------------------------------------------------------------
 # SELECT INGREDIENTS FEATURE
 # -----------------------------------------------------------------------------------------------------
+
+# TESTED - adds ingredients to an array once the user selects them and updates the ingredient value to true in the individual_recipe object class
 def add_ingredients(ingredient, user_ingredients)
   system 'clear'
   if ingredient != 'Finished Adding Ingredients'
@@ -77,7 +79,6 @@ def add_ingredients(ingredient, user_ingredients)
     else
       # this piece of code is causing bugs need to investigate
       user_ingredients.push(ingredient)
-      # TESTED
       $recipes.individual_recipe.each_with_index do |item, _index|
         item.ingredients[ingredient] = true if item.ingredients.has_key?(ingredient)
       end
@@ -85,11 +86,11 @@ def add_ingredients(ingredient, user_ingredients)
   end
 end
 
+# TESTED - removes ingredients from the array once the user selects them and updates the ingredient value to false in the individual_recipe object class
 def remove_ingredients(ingredient, user_ingredients)
   system 'clear'
   if ingredient != 'Finished Removing Ingredients'
     user_ingredients.delete(ingredient)
-    # TESTED
     $recipes.individual_recipe.each_with_index do |item, _index|
       item.ingredients[ingredient] = false if item.ingredients.has_key?(ingredient)
     end
@@ -99,14 +100,15 @@ end
 # -----------------------------------------------------------------------------------------------------
 # MATCHING RECIPES FEATURE
 # -----------------------------------------------------------------------------------------------------
-# this is not working properly as it is only incrementing over 1 recipe. now it seems to be working?? what did i change.. no idea.
+
+# this is not working properly as it is only incrementing over 1 recipe. now it seems to be working?? what did i change.. no idea
 def matching_recipes
-  # need to test this - may not even need it
   $recipes.individual_recipe.each do |item|
     item.selected_ingredients
   end
 end
 
+# TESTED - adds recipes to an array once the user selects them and sets the selected_recipe attribute to true in the individual_recipe class object
 def add_recipes(recipe, user_recipes)
   system 'clear'
   if recipe != 'Finished Adding Recipes'
@@ -114,10 +116,21 @@ def add_recipes(recipe, user_recipes)
       puts 'You have already added that recipe, please choose a different recipe'.colorize(:red)
     else
       user_recipes.push(recipe)
-      # TESTED
       $recipes.individual_recipe.each do |item|
         item.selected_recipe = true if recipe.include? item.name
       end
+    end
+  end
+end
+
+# TESTED - removes recipes from an array once the user selects them and sets the selected_recipe attribute to false in the individual_recipe class object
+def remove_recipes(recipe, user_recipes)
+  system 'clear'
+  if recipe != 'Finished Removing Recipes'
+    user_recipes.delete(recipe)
+    # NEED TO TEST
+    $recipes.individual_recipe.each do |item|
+      item.selected_recipe = false if recipe.include? item.name
     end
   end
 end
@@ -132,17 +145,6 @@ def display_entire_recipe(recipe, user_recipes)
   if recipe != 'Finished Viewing Recipes' && user_recipes.find { |item| item == recipe }
     $recipes.individual_recipe.each do |item|
       item.print_full_recipe if recipe.include? item.name
-    end
-  end
-end
-
-def remove_recipes(recipe, user_recipes)
-  system 'clear'
-  if recipe != 'Finished Removing Recipes'
-    user_recipes.delete(recipe)
-    # NEED TO TEST
-    $recipes.individual_recipe.each do |item|
-      item.selected_recipe = false if recipe.include? item.name
     end
   end
 end
@@ -178,7 +180,6 @@ while option != 'Exit'
         added_ingredient = ''
         while added_ingredient != 'Finished Adding Ingredients'
           puts user_ingredients
-          # puts $recipes.display_ingredients
           added_ingredient = add_ingredients_sub_menu
           add_ingredients(added_ingredient, user_ingredients)
         end
@@ -241,7 +242,6 @@ while option != 'Exit'
     if user_recipes != []
       recipe = ''
       while recipe != 'Finished Viewing Recipes'
-        # puts user_recipes
         recipe = user_recipes_sub_menu(user_recipes)
         display_entire_recipe(recipe, user_recipes)
         # puts "Press 'Enter' to go back".colorize(:cyan)
@@ -256,7 +256,6 @@ while option != 'Exit'
       system 'clear'
       selected_recipes_list = []
       selected_recipes_list = $recipes.selected_recipes
-      # puts $recipes.selected_recipes
       puts 'Here are the ingredients you need to buy'.colorize(:cyan)
       $recipes.display_missing_ingredients(selected_recipes_list)
       puts "press 'Enter' to go back".colorize(:cyan)

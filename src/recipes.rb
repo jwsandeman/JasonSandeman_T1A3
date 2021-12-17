@@ -16,7 +16,7 @@ class Recipes
     available_ingredients
   end
 
-  # TESTED - finds the recipes that the user has selected based on the selected_recipe attrbute being set to true and returns an array of recipe ingredients - maybe this function could be moved into main to help it work with display_missing_ingredients better
+  # TESTED - finds the recipes that the user has selected based on the selected_recipe attribute being set to true and returns an array of recipe ingredients
   def selected_recipes
     selected_recipes = []
     @individual_recipe.each do |i|
@@ -30,18 +30,10 @@ class Recipes
     unselected_ingredients = []
     missing_ingredients = []
     ingredients.each do |item|
-      # @individual_recipe.each do |item|
-      # unselected_ingredients.push(item.ingredients.select {|k, v| v == false})
       unselected_ingredients.push(item.select { |_k, v| v == false })
     end
-    # missing_ingredients.push(unselected_ingredients.each {|k, v| k})
     missing_ingredients.push(unselected_ingredients.each { |i| puts i.keys })
-    # unselected_ingredients.each {|k, v| puts k}
-    # unselected_ingredients.each do |k, v|
-    #     missing_ingredients.push(k)
-    # end
     missing_ingredients
-    # return unselected_ingredients
   end
 
   # TESTED - this is redundant code as it was only used to confirm a test before being used inside main.rb

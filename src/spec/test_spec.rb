@@ -242,9 +242,8 @@ describe 'Test display_missing_ingredients' do
     recipes.individual_recipe[1].selected_recipe = true
     new_ingredients = []
     new_ingredients = recipes.selected_recipes
-    expect(recipes.display_missing_ingredients(new_ingredients)).to eq([{ '3 fresh whole rosemary sprigs' => false },
-                                                                        { '1 cup grated cheddar cheese' => false, '1 handful tortilla chips' => false,
-                                                                          '1 medium red capsicum finely chopped' => false, '2 sheets puff pastry' => false, '2 tbsp chopped coriander' => false, '400g can mixed beans drained' => false, '8 jalapeños chopped' => false, '⅓ cup chopped shallots' => false }])
+    expect(recipes.display_missing_ingredients(new_ingredients)).to eq([[{"3 fresh whole rosemary sprigs"=>false}, {"1 cup grated cheddar cheese"=>false, "1 handful tortilla chips"=>false,
+        +   "1 medium red capsicum finely chopped"=>false, "2 sheets puff pastry"=>false, "2 tbsp chopped coriander"=>false, "400g can mixed beans drained"=>false, "8 jalapeños chopped"=>false, "⅓ cup chopped shallots"=>false}]])
   end
 end
 
