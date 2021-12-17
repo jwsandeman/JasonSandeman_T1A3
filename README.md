@@ -48,15 +48,15 @@ Alternatively you can give the app a head start by passing in your name with the
 
 To run this application on your computer you will need access to your terminal with the correct permissions enabled so that you run bash commands from the terminal.
 
+You will also need ruby installed which be done following these [instructions](https://www.ruby-lang.org/en/downloads/). There are instructions for Linux, Mac and Windows users.
+
 If you get a permission error when trying to run the install command you can use the following command to change your permissions. After that you should be able to run the install command above.
 
 ```bash
    chmod +x ./install.sh
 ```
 
-You will also need ruby installed which be done following these [instructions](https://www.ruby-lang.org/en/downloads/). There are instructions for Linux, Mac and Windows users.
-
-If you are having trouble getting the app to run make sure you have the following dependencies and their correct versions. Check the gemfile to make sure the your gems are using a similar version (if the last and second last version numbers are different that should still be fine.) and update them in the Gemfile in the './src' directory if necessary.
+If you are having trouble getting the app to run make sure you have the following dependencies and their correct versions. Check the gemfile to make sure the your gems are using a similar version (if the last and second last decimal place in the version numbers are different that should still be fine.) and update them in the Gemfile in the './src' directory if necessary.
 
 ```bash
    gem 'colorize', '~> 0.8.1'
@@ -104,7 +104,13 @@ Following the installation instructions above, and once all the dependencies hav
 
 ## 2. Features
 
-When a user first runs the app they will be presented with an interactive TTY-Prompt menu of options displaying the following features: 1. Select Ingredients - This is where you select ingredients you currently have at home. You can add or remove as many ingredients as you want. 2. Matching Recipes - This shows a list of recipes that match your ingredients. You can select as many recipes as you want. You can also remove recipes if you change your mind. 3. My Recipes - Here you can view your recipes and then select a recipe to view the cooking instructions for that recipe. 4. Shoppig List - This is a list of all of the ingredients that are missing from your selected recipes. 5. Exit - This will close the application.
+When a user first runs the app they will be presented with an interactive TTY-Prompt menu of options displaying the following features:
+
+   1. Select Ingredients - This is where you select ingredients you currently have at home. You can add or remove as many ingredients as you want.
+   2. Matching Recipes - This shows a list of recipes that match your ingredients. You can select as many recipes as you want. You can also remove recipes if you change your mind.
+   3. My Recipes - Here you can view your recipes and then select a recipe to view the cooking instructions for that recipe.
+   4. Shoppig List - This is a list of all of the ingredients that are missing from your selected recipes.
+   5. Exit - This will close the application.
 
 ### Select Ingredients
 

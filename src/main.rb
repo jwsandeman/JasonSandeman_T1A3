@@ -11,9 +11,9 @@ $prompt = TTY::Prompt.new
 artii = Artii::Base.new
 bar = TTY::ProgressBar.new("Generating [:bar]", total: 40)
 
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
 # MENUS
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
 def main_menu
   $prompt.select('Please choose from the menu options below'.colorize(:cyan),
                  ['Select Ingredients', 'Matching Recipes', 'My Recipes', 'Shopping List', 'Exit'])
@@ -77,9 +77,9 @@ def user_recipes_sub_menu(user_recipes)
   )
 end
 
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
 # SELECT INGREDIENTS FEATURE
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
 
 # TESTED - adds ingredients to an array once the user selects them and updates the ingredient value to true in the individual_recipe object class
 def add_ingredients(ingredient, user_ingredients)
@@ -108,9 +108,9 @@ def remove_ingredients(ingredient, user_ingredients)
   end
 end
 
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
 # MATCHING RECIPES FEATURE
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
 
 # TESTED - runs selected ingredients functions everytime user accesses matching recipes menu
 def matching_recipes
@@ -146,9 +146,23 @@ def remove_recipes(recipe, user_recipes)
   end
 end
 
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
 # MY RECIPES FEATURE
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
+
+# TESTED - main logic for displaying and interacting with my recipes feature
+def my_recipes(user_recipes)
+  system 'clear'
+  if user_recipes != []
+    recipe = ''
+    while recipe != 'Finished Viewing Recipes'
+      recipe = user_recipes_sub_menu(user_recipes)
+      display_entire_recipe(recipe, user_recipes)
+    end
+  else
+    puts 'You need to add some recipes first.'.colorize(:red)
+  end
+end
 
 # TESTED - prints full recipe method in a list to the screen
 def display_entire_recipe(recipe, user_recipes)
@@ -160,9 +174,32 @@ def display_entire_recipe(recipe, user_recipes)
   end
 end
 
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
+# SHOPPING LIST FEATURE
+#----------------------------------------------------------------------------------------------------
+
+# TESTED - main logic for displaying and interacting with shopping list feature
+def shopping_list(user_ingredients, user_recipes)
+  if user_ingredients != [] && user_recipes != []
+    system 'clear'
+    selected_recipes_list = []
+    selected_recipes_list = $recipes.selected_recipes
+    puts 'Here are the ingredients you need to buy'.colorize(:cyan)
+    $recipes.display_missing_ingredients(selected_recipes_list)
+    puts "press 'Enter' to go back".colorize(:cyan)
+    STDIN.gets
+    system 'clear'
+  else
+    system 'clear'
+    puts 'You need to add some ingredients and recipes first before we can create the shopping list.'.colorize(:red)
+  end
+end
+
+
+
+#----------------------------------------------------------------------------------------------------
 # WELCOME SCREEN AND MAIN MENU LOGIC
-# -----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
 
 # Welcome message
 system 'clear'
@@ -265,33 +302,9 @@ while option != 'Exit'
       puts 'You need to add some ingredients first before we can reccomend any recipes.'.colorize(:red)
     end
   when 'My Recipes'
-    system 'clear'
-    if user_recipes != []
-      recipe = ''
-      while recipe != 'Finished Viewing Recipes'
-        recipe = user_recipes_sub_menu(user_recipes)
-        display_entire_recipe(recipe, user_recipes)
-        # puts "Press 'Enter' to go back".colorize(:cyan)
-        # gets
-        # system "clear"
-      end
-    else
-      puts 'You need to add some recipes first.'.colorize(:red)
-    end
+    my_recipes(user_recipes)
   when 'Shopping List'
-    if user_ingredients != [] && user_recipes != []
-      system 'clear'
-      selected_recipes_list = []
-      selected_recipes_list = $recipes.selected_recipes
-      puts 'Here are the ingredients you need to buy'.colorize(:cyan)
-      $recipes.display_missing_ingredients(selected_recipes_list)
-      puts "press 'Enter' to go back".colorize(:cyan)
-      STDIN.gets
-      system 'clear'
-    else
-      system 'clear'
-      puts 'You need to add some ingredients and recipes first before we can create the shopping list.'.colorize(:red)
-    end
+    shopping_list(user_ingredients, user_recipes)
   else
     system 'clear'
     puts artii.asciify('Thanks for stopping by!').colorize(:green)

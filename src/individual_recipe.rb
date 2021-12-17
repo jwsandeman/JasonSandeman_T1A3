@@ -22,7 +22,6 @@ class IndividualRecipe
   def selected_ingredients
     n = 0
     @ingredients.each do |_k, v|
-      # @selected_ingredients += 1 if v == true
       n += 1 if v == true
     end
     @selected_ingredients = n
