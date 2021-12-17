@@ -38,7 +38,7 @@ Runs the application:
   ruby main.rb
 ```
 
-Alternatively you can give the app a head start by passing in your name with the run command for example:
+Alternatively you can give the app a head start by passing in your name with the run command for example(make sure to use ""):
 
 ```bash
    ruby main.rb "John Connor"

@@ -7,4 +7,4 @@ bundle install
 #clear the screen
 clear
 #run program
-ruby main.rb
+#ruby main.rb # removed this to enable user to manually pass in command line argument

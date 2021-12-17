@@ -20,12 +20,14 @@ class IndividualRecipe
 
   # TESTED - increments @selected_ingredients for each ingredient that has a value of true
   def selected_ingredients
+    n = 0
     @ingredients.each do |_k, v|
-      # if item.has_value?(true)
-      @selected_ingredients += 1 if v == true
+      # @selected_ingredients += 1 if v == true
+      n += 1 if v == true
     end
+    @selected_ingredients = n
     # used below return for test case
-    @selected_ingredients
+    # @selected_ingredients
   end
 
   # MANUALLY TESTED - prints the full recipe method

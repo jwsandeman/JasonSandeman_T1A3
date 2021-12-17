@@ -90,7 +90,7 @@ def add_ingredients(ingredient, user_ingredients)
     else
       # this piece of code is causing bugs need to investigate
       user_ingredients.push(ingredient)
-      $recipes.individual_recipe.each_with_index do |item, _index|
+      $recipes.individual_recipe.each do |item|
         item.ingredients[ingredient] = true if item.ingredients.has_key?(ingredient)
       end
     end
@@ -102,7 +102,7 @@ def remove_ingredients(ingredient, user_ingredients)
   system 'clear'
   if ingredient != 'Finished Removing Ingredients'
     user_ingredients.delete(ingredient)
-    $recipes.individual_recipe.each_with_index do |item, _index|
+    $recipes.individual_recipe.each do |item|
       item.ingredients[ingredient] = false if item.ingredients.has_key?(ingredient)
     end
   end
@@ -112,7 +112,7 @@ end
 # MATCHING RECIPES FEATURE
 # -----------------------------------------------------------------------------------------------------
 
-# this is not working properly as it is only incrementing over 1 recipe. now it seems to be working?? what did i change.. no idea
+# TESTED - runs selected ingredients functions everytime user accesses matching recipes menu
 def matching_recipes
   $recipes.individual_recipe.each do |item|
     item.selected_ingredients
@@ -124,6 +124,7 @@ def add_recipes(recipe, user_recipes)
   system 'clear'
   if recipe != 'Finished Adding Recipes'
     if user_recipes.find { |item| item == recipe }
+      # if user_recipes.find { |item| item == recipe }
       puts 'You have already added that recipe, please choose a different recipe'.colorize(:red)
     else
       user_recipes.push(recipe)
@@ -139,7 +140,6 @@ def remove_recipes(recipe, user_recipes)
   system 'clear'
   if recipe != 'Finished Removing Recipes'
     user_recipes.delete(recipe)
-    # NEED TO TEST
     $recipes.individual_recipe.each do |item|
       item.selected_recipe = false if recipe.include? item.name
     end
@@ -286,7 +286,7 @@ while option != 'Exit'
       puts 'Here are the ingredients you need to buy'.colorize(:cyan)
       $recipes.display_missing_ingredients(selected_recipes_list)
       puts "press 'Enter' to go back".colorize(:cyan)
-      gets
+      STDIN.gets
       system 'clear'
     else
       system 'clear'
