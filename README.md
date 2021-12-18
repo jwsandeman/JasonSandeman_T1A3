@@ -44,7 +44,7 @@ Alternatively you can give the app a head start by passing in your name with the
    ruby main.rb "John Connor"
 ```
 
-## Troubleshooting
+## Troubleshooting/Help
 
 To run this application on your computer you will need access to your terminal with the correct permissions enabled so that you run bash commands from the terminal.
 
