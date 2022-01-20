@@ -1,7 +1,7 @@
 #remove Gemfile.lock
 rm Gemfile.lock
 #install bundle
-gem install bundle
+gem install bundler
 #install the gems
 bundle install
 #clear the screen
